@@ -18,6 +18,9 @@ public class Craps {
 	public Craps(Player[] players, int roundsInMatch) {
 		this.players = players;
 		winningRoll = false;
+		wins = new int[players.length];
+		for(int i : wins)
+			i = 0;
 		currentPlayer = rand.nextInt(2);
 		flipWinner = currentPlayer;
 		this.roundsInMatch = roundsInMatch;
