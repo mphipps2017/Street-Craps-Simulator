@@ -11,12 +11,17 @@ public class Craps {
 	private boolean winningRoll;
 	private int currentPlayer;
 	private int roundsInMatch;
+	private int flipWinner;
+	private int numTimesFlipWin;
+	private Random rand = new Random();
 	
 	public Craps(Player[] players, int roundsInMatch) {
 		this.players = players;
 		winningRoll = false;
-		currentPlayer = 0;
+		currentPlayer = rand.nextInt(2);
+		flipWinner = currentPlayer;
 		this.roundsInMatch = roundsInMatch;
+		numTimesFlipWin = 0;
 	}
 	
 	public void runTurn() {
@@ -60,6 +65,8 @@ public class Craps {
 		for(int i = 0; i < wins.length; i++) {
 			if(wins[i] > roundsInMatch/2) {
 				players[i].incWins();
+				if(i == flipWinner)
+					numTimesFlipWin++;
 				newMatch();
 			}
 				
@@ -67,6 +74,15 @@ public class Craps {
 	}
 	
 	private int newMatch() {
-		
+		for(int i: wins) {
+			i = 0;
+		}
+		currentPlayer = rand.nextInt(2);
+		flipWinner = currentPlayer;
+		return 0;
+	}
+	
+	public int getNumTimeFlipWin() {
+		return numTimesFlipWin;
 	}
 }
